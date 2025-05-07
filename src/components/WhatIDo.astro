@@ -3,9 +3,17 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+// import type { CollectionEntry } from "astro:content";
+// const posts = (await getCollection("blog")) as CollectionEntry<"blog">[];
 import FormattedDate from "@/components/FormattedDate.astro";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import type { ImageMetadata } from 'astro';
+
+// Load all hero images from your assets folder
+const heroImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpg,jpeg,png,webp}');
+
+
 
 const bgClasses = [
   // "bg-pgreen rounded-full",
@@ -24,35 +32,42 @@ const getRandomClass = () => {
   <h2 class="text-4xl font-bold">ポートフォリオ</h2>
   <ul class="flex flex-wrap justify-center md:justify-start gap-8 py-20">
     {
-      posts.map((post) => {
-        const randomClass = getRandomClass();
-        return (
-          <li class="w-72 text-left rounded-3xl border-1 border-black shadow-card group hover:shadow-hover transition  px-4 py-6 flex flex-col gap-6">
-            <a href={`/blog/${post.id}/`} class="flex flex-col gap-4">
-              <div
-                class={`${randomClass} text-4xl p-2 self-start border-1 border-black shadow-card1 group-hover:shadow-card transition`}
-              >
-                {post.data.heroImage && (
-            <Image
-              src={post.data.heroImage}  // Make sure previewImage is a valid image path
-              alt={post.data.title}          // Set alt text to the post title
-              class="w-full h-48 object-cover rounded-2xl border-1 border-black shadow-md transition-all duration-500"
-              loading="lazy"
-              width={600}                    // Add width
-              height={300}                   // Add height
-            />
-          )}
-
-              </div>
-              <h4 class="text-xl font-semibold">{post.data.title}</h4>
-              <p class="date -mt-4 text-sm font-light">
-                <FormattedDate date={post.data.pubDate} />
-              </p>
-            </a>
-            <div set:html={post.data.description} />
-          </li>
-        );
-      })
+      await Promise.all(
+        posts.map(async (post) => {
+          const randomClass = getRandomClass();
+  
+          // Resolve the hero image (if exists)
+          let resolvedHeroImage = null;
+          if (post.data.heroImage && heroImages[post.data.heroImage]) {
+            resolvedHeroImage = (await heroImages[post.data.heroImage]()).default;
+          }
+  
+          return (
+            <li class="w-72 text-left rounded-3xl border-1 border-black shadow-card group hover:shadow-hover transition  px-4 py-6 flex flex-col gap-6">
+              <a href={`/blog/${post.id}/`} class="flex flex-col gap-4">
+                <div class={`${randomClass} text-4xl p-2 self-start border-1 border-black shadow-card1 group-hover:shadow-card transition`}>
+                  {resolvedHeroImage && (
+                    <Image
+                      src={resolvedHeroImage}
+                      alt={post.data.title}
+                      class="w-full h-48 object-cover rounded-2xl border-1 border-black shadow-md transition-all duration-500"
+                      loading="lazy"
+                      width={600}
+                      height={300}
+                    />
+                  )}
+                </div>
+                <h4 class="text-xl font-semibold">{post.data.title}</h4>
+                <p class="date -mt-4 text-sm font-light">
+                  <FormattedDate date={post.data.pubDate} />
+                </p>
+              </a>
+              <div set:html={post.data.description} />
+            </li>
+          );
+        })
+      )
     }
   </ul>
+  
 </section>
