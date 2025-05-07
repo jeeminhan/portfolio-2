@@ -6,7 +6,7 @@ description:
 previewImage: "/src/assets/preview1.jpg"
 pubDate: "Dec 19 2022"
 icon: '1'
-heroImage: "/src/assets/1bitadder.png"
+heroImage: "/src/assets/euro.jpg"
 ---
 
 # Single Cycle Processor
