@@ -1,8 +1,7 @@
 ---
 title: "MError"
 description:
-  'Smart Mirror
-  '
+  'Smart Mirror created using Raspberry Pi'
 previewImage: "/src/assets/preview1.jpg"
 pubDate: "Jun 19 2024"
 icon: '1'

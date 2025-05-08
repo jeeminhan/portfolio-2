@@ -1,7 +1,7 @@
 ---
 title: "Workout Buddy"
 description:
-  'A Image detection based squat and pushup form helper
+  'A Image detection based squat and pushup form helper created with Raspberry Pi
   '
 previewImage: "/src/assets/preview1.jpg"
 pubDate: "Jun 19 2024"

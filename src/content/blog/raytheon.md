@@ -1,7 +1,7 @@
 ---
 title: "Raytheon Internship"
 description:
-  '3 month internship in El Segundo, California
+  '3 month internship as a program on devSecOps pipeline. Helping to automate testing.
   '
 previewImage: "/src/assets/preview1.jpg"
 pubDate: "Aug 12 2022"

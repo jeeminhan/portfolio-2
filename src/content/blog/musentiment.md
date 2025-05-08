@@ -1,7 +1,7 @@
 ---
 title: "MuSentiment"
 description:
-  'Datathon Project
+  '2nd place Datathon winner, statistical analysis project
   '
 previewImage: "/src/assets/preview1.jpg"
 pubDate: "Dec 19 2022"
