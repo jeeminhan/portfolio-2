@@ -9,7 +9,7 @@ icon: '1'
 heroImage: "/src/assets/1bitadder.png"
 ---
 
-# Single Cycle Processor
+# 1 Bit Adder
 For my Digital Circuit Design class I created a 1 bit adder digitally using circuit design software. Although we did create more complex projects in this class this one was nice because I had created an adder physically before, and so to create one digitally was satisfying.
 
 
