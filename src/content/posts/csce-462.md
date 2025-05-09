@@ -11,7 +11,7 @@ heroImage: "/src/assets/pedestrian_walkway.png"
 
 # Cross Traffic Controller
 ## Add video Lab_2_Polling
-sdfsdf
+
 
 
 
